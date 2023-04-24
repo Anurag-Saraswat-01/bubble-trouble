@@ -18,7 +18,7 @@ export default {
       bubbles.value[count.value] = count.value;
       //   console.log("Bubble generated", count.value);
       count.value++;
-    }, 2000);
+    }, 1500);
 
     function popBubble(idx) {
       bubbles.value[idx] = null;
