@@ -3,7 +3,7 @@ import { ref, watch } from "vue";
 
 export default {
   props: {
-    id: Number,
+    idx: Number,
   },
   setup(props, context) {
     const audio = ref(null);
@@ -28,8 +28,9 @@ export default {
       poppedBubble.style.animationPlayState = "running";
       poppedBubble.classList.add("pop");
 
-      context.emit("pop", props.id);
+      context.emit("pop", props.idx);
       popped.value = true;
+      bubble.value.style.display = "none";
     }
 
     const topPopper = setInterval(() => {
@@ -38,7 +39,7 @@ export default {
         bubble.value &&
         bubble.value.getBoundingClientRect().top < -100
       ) {
-        context.emit("pop", props.id);
+        context.emit("pop", props.idx);
         popped.value = true;
         bubble.value.style.display = "none";
       }
@@ -62,7 +63,7 @@ export default {
 </script>
 
 <template>
-  <div :if="popped" class="bubble-outer">
+  <div :class="`bubble-outer`">
     <audio ref="audio" class="audio">
       <source src="../assets/audio/poit.mp3" />
     </audio>

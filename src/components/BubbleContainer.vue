@@ -17,16 +17,11 @@ export default {
     setInterval(() => {
       bubbles.value[count.value] = count.value;
       //   console.log("Bubble generated", count.value);
-      let tempCount = count.value;
-      setTimeout(() => {
-        // console.log("Timeout", tempCount);
-        delete bubbles.value[tempCount];
-      }, 13000);
       count.value++;
-    }, 1500);
+    }, 2000);
 
-    function popBubble(id) {
-      delete bubbles.value[id];
+    function popBubble(idx) {
+      bubbles.value[idx] = null;
       //   console.log("Bubble popped", id);
       //   console.log(Object.keys(bubbles.value));
     }
@@ -41,7 +36,7 @@ export default {
     <Header />
     <div class="bubble-wrapper">
       <div v-for="bubble in Object.keys(bubbles)">
-        <Bubble :id="bubbles[bubble]" @pop="popBubble" />
+        <Bubble :idx="bubbles[bubble]" @pop="popBubble" />
       </div>
     </div>
     <Footer />
